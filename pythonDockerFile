@@ -11,7 +11,7 @@ RUN apt-key fingerprint 0EBFCD88
 RUN add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) stable"
-RUN apt-get install -qqy docker-ce
+
 RUN docker build -f pythonDockerFile . -t asmaa1123/python_v1
 RUN docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKERHUB }}
 RUN docker push asmaa1123/python_v1

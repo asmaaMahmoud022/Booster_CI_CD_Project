@@ -3,7 +3,15 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY . .
-
-RUN docker build -f dockerfile . -t asmaa1123/python_v1
+RUN apt-get update -qq && apt-get install -qqy apt-transport-https \
+       ca-certificates curl gnupg2 \
+       software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN apt-key fingerprint 0EBFCD88
+RUN add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) stable"
+RUN apt-get update -qq && apt-get install -qqy docker-ce
+RUN docker build -f pythonDockerFile . -t asmaa1123/python_v1
 RUN docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKERHUB }}
 RUN docker push asmaa1123/python_v1

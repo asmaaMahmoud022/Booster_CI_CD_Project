@@ -1,0 +1,9 @@
+FROM python:3.8-slim-buster
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+
+RUN docker build -f dockerfile . -t asmaa1123/python_v1
+RUN docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKERHUB }}
+RUN docker push asmaa1123/python_v1

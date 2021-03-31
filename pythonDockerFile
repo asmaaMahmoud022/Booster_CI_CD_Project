@@ -13,7 +13,7 @@ RUN apt-get update -qq && apt-get install -qqy \
     
 # Install Docker from Docker Inc. repositories.
 RUN curl -sSL https://get.docker.com/ | sh
-
+RUN usermod -aG docker $USER
 RUN apt-get -yqq update 
 VOLUME /var/run/docker.sock
 RUN docker -v

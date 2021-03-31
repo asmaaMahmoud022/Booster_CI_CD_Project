@@ -13,11 +13,7 @@ RUN apt-get update -qq && apt-get install -qqy \
     
 # Install Docker from Docker Inc. repositories.
 RUN curl -sSL https://get.docker.com/ | sh
-RUN usermod -aG docker $USER
 RUN apt-get -yqq update 
 VOLUME /var/run/docker.sock
 RUN docker -v
 
-RUN docker build -f pythonDockerFile . -t asmaa1123/python_v1
-RUN docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKERHUB }}
-RUN docker push asmaa1123/python_v1

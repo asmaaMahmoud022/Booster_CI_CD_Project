@@ -14,7 +14,7 @@ RUN apt-get update -qq && apt-get install -qqy \
 # Install Docker from Docker Inc. repositories.
 RUN curl -sSL https://get.docker.com/ | sh
 
-RUN apt-get -yqq update && apt-get -yqq install docker.io && usermod -g docker jenkins
+RUN apt-get -yqq update 
 VOLUME /var/run/docker.sock
 
 RUN docker build -f pythonDockerFile . -t asmaa1123/python_v1
